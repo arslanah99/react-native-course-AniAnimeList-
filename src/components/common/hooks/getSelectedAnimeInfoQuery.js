@@ -9,6 +9,6 @@ const getSelectedAnimeInfo = async () => {
 };
 
 export const UsegetSelectedAnimeInfoQuery = () => {
-  const {isLoading, data} = useQuery(['allAnime'], getSelectedAnimeInfo);
+  const {isLoading, data} = useQuery(['selectedAnime'], getSelectedAnimeInfo);
   return {data, isLoading};
 };
