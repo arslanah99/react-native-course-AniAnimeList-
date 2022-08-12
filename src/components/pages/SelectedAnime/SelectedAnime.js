@@ -1,5 +1,7 @@
-import React from 'react';
-import {View, Text, StyleSheet} from 'react-native';
+import React, {useState, useCallback} from 'react';
+import {View, Text, StyleSheet, Alert} from 'react-native';
+import YoutubePlayer from 'react-native-youtube-iframe';
+import {UsegetSelectedAnimeInfoQuery} from '../../common/hooks/getSelectedAnimeInfoQuery';
 
 const styles = StyleSheet.create({
   columnWrapperStyle: {
@@ -13,17 +15,60 @@ const styles = StyleSheet.create({
     bottom: 0,
     right: 0,
     height: 500,
-    width: 50
+    width: 50,
   },
 });
 
 const SelectedAnimeScreen = ({route}) => {
+  const [playing, setPlaying] = useState(false);
+  const {data, isLoading} = UsegetSelectedAnimeInfoQuery();
+
+  const onStateChange = useCallback(state => {
+    if (state === 'ended') {
+      setPlaying(false);
+    }
+    if (state === 'playing') {
+      setPlaying(true);
+    }
+    if (state === 'paused') {
+      setPlaying(false);
+    }
+  }, []);
+
+  const togglePlaying = useCallback(() => {
+    setPlaying(prev => !prev);
+  }, []);
+
   const selectedanimeData = route.params.selectedAnimeObj;
   return (
-    <View>
+    <View style={{backgroundColor: playing ? 'black' : 'white'}}>
       <Text>HELLO</Text>
       <Text>{selectedanimeData.title}</Text>
       <Text>{selectedanimeData.title_japanese}</Text>
+
+      {isLoading ? (
+        <Text>Loading...</Text>
+      ) : data ? (
+        <YoutubePlayer
+          height={300}
+          play={playing}
+          videoId={'WD2toK5WCn0'}
+          // videoId={data.data.trailer.youtube_id}
+          onChangeState={onStateChange}
+        />
+      ) : (
+        // <Text>
+        //   {data.data.map((anime, key) => {
+
+        //     return (
+        //       <View>
+        //         <Text>{anime.title}</Text>
+        //       </View>
+        //     );
+        //   })}
+        // </Text>
+        <Text>Whoops No Data Available</Text>
+      )}
     </View>
   );
 };
