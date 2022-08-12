@@ -1,7 +1,7 @@
 import React, {useState, useCallback} from 'react';
 import {View, Text, StyleSheet, Alert} from 'react-native';
 import YoutubePlayer from 'react-native-youtube-iframe';
-import { UsegetSelectedAnimeInfoQuery } from '../../common/hooks/getSelectedAnimeInfoQuery';
+import {UsegetSelectedAnimeInfoQuery} from '../../common/hooks/getSelectedAnimeInfoQuery';
 
 const styles = StyleSheet.create({
   columnWrapperStyle: {
@@ -21,7 +21,9 @@ const styles = StyleSheet.create({
 
 const SelectedAnimeScreen = ({route}) => {
   const [playing, setPlaying] = useState(false);
-  const {data, isLoading} = UsegetSelectedAnimeInfoQuery();
+  const {data, isLoading} = UsegetSelectedAnimeInfoQuery(
+    route.params.selectedAnimeObj.mal_id,
+  );
 
   const onStateChange = useCallback(state => {
     if (state === 'ended') {
@@ -42,20 +44,26 @@ const SelectedAnimeScreen = ({route}) => {
   const selectedanimeData = route.params.selectedAnimeObj;
   return (
     <View style={{backgroundColor: playing ? 'black' : 'white'}}>
-      <Text >HELLO</Text>
+      <Text>HELLO</Text>
       <Text>{selectedanimeData.title}</Text>
       <Text>{selectedanimeData.title_japanese}</Text>
 
-       {isLoading ? (
+      {isLoading ? (
         <Text>Loading...</Text>
       ) : data ? (
-        <YoutubePlayer
-        height={300}
-        play={playing}
-        videoId={"WD2toK5WCn0"}
-        // videoId={data.data.trailer.youtube_id}
-        onChangeState={onStateChange}
-      />
+        <View>
+          {data.data.trailer.youtube_id ? (
+            <YoutubePlayer
+              height={300}
+              play={playing}
+              // videoId={'WD2toK5WCn0'}
+              videoId={data.data.trailer.youtube_id}
+              onChangeState={onStateChange}
+            />
+          ) : (
+            <Text>Unfortunetly no trailer is Available</Text>
+          )}
+        </View>
       ) : (
         // <Text>
         //   {data.data.map((anime, key) => {
