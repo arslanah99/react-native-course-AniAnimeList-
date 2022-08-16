@@ -2,15 +2,15 @@ import {useQuery} from '@tanstack/react-query';
 import axios from 'axios';
 
 const getAnimeRecommendations = async id => {
-  const selectedAnimeURL = `https://api.jikan.moe/v4/anime/${id}/recommendations`;
+  const recommendedAnimeURL = `https://api.jikan.moe/v4/anime/${id}/recommendations`;
 
-  const response = await axios.get(selectedAnimeURL);
+  const response = await axios.get(recommendedAnimeURL);
   return response.data;
 };
 
 export const UseGetAnimeRecommendationsQuery = id => {
   const {isLoading, data} = useQuery(
-    ['animeRecommendation'],
+    ['recommendedAnime'],
     () => getAnimeRecommendations(id),
     {refetchOnReconnect: 'always'},
   );
