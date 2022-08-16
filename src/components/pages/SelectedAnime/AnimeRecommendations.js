@@ -82,9 +82,6 @@ const AnimeRecommendationScreen = ({animeId}) => {
     }
   }, [data, isLoading]);
 
-  // useEffect(() => {
-  // setDataProvider(createNewDataProvider().cloneWithRows(data.data));
-  // }, [data.data]);
   return (
     <View
       style={{
