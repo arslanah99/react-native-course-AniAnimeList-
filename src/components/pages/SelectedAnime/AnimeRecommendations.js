@@ -66,9 +66,7 @@ const renderList = (type, animeData, index) => {
 
 const AnimeRecommendationScreen = ({animeId}) => {
   const {data, isLoading} = UseGetAnimeRecommendationsQuery(animeId);
-  const [dataProvider, setDataProvider] = React.useState(
-    createNewDataProvider().cloneWithRows(data.data),
-  );
+  const [dataProvider, setDataProvider] = React.useState(null);
 
   const _layoutProvider = new LayoutProvider(
     index => 0,
@@ -79,8 +77,14 @@ const AnimeRecommendationScreen = ({animeId}) => {
   );
 
   useEffect(() => {
-    setDataProvider(createNewDataProvider().cloneWithRows(data.data));
-  }, [data.data]);
+    if (isLoading === false && data !== undefined) {
+      setDataProvider(createNewDataProvider().cloneWithRows(data.data));
+    }
+  }, [data, isLoading]);
+
+  // useEffect(() => {
+  // setDataProvider(createNewDataProvider().cloneWithRows(data.data));
+  // }, [data.data]);
   return (
     <View
       style={{
@@ -110,6 +114,7 @@ const AnimeRecommendationScreen = ({animeId}) => {
                 forceNonDeterministicRendering
                 showsHorizontalScrollIndicator={false}
                 canChangeSize
+                maxToRenderPerBatch={500}
               />
             </View>
           ) : (
