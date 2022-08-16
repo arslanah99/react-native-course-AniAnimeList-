@@ -1,19 +1,18 @@
 import {useQuery} from '@tanstack/react-query';
 import axios from 'axios';
 
-const getSelectedAnimeInfo = async animeId => {
-    console.log(animeId)
-  const allAnimeUrl = `https://api.jikan.moe/v4/anime/${animeId}/full`;
+const getSelectedAnimeInfo = async id => {
+  const selectedAnimeURL = `https://api.jikan.moe/v4/anime/${id}/full`;
 
-  const response = await axios.get(allAnimeUrl);
+  const response = await axios.get(selectedAnimeURL);
   return response.data;
 };
 
-export const UsegetSelectedAnimeInfoQuery = id => {
+export const UseGetSelectedAnimeInfo = id => {
   const {isLoading, data} = useQuery(
     ['selectedAnime'],
     () => getSelectedAnimeInfo(id),
-    {refetchOnReconnect: "always"},
+    {refetchOnReconnect: 'always'},
   );
   return {data, isLoading};
 };
