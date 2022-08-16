@@ -1,8 +1,30 @@
 import React, {useState, useCallback} from 'react';
-import {View, Text, Dimensions} from 'react-native';
+import {
+  View,
+  Text,
+  Dimensions,
+  StyleSheet,
+  ImageBackground,
+} from 'react-native';
 import YoutubeIframe from 'react-native-youtube-iframe';
 
 const dimensionsForScreen = Dimensions.get('screen');
+
+const styles = StyleSheet.create({
+  container: {
+    paddingTop: 50,
+  },
+  tinyLogo: {
+    height: 200,
+    width: 100,
+    borderRadius: 10,
+    margin: 10,
+  },
+  centerContent: {
+    justifyContent: 'center',
+    alignItems: 'center',
+  },
+});
 
 const AnimeTrailerScreen = ({data, isLoading}) => {
   const [playing, setPlaying] = useState(false);
@@ -23,24 +45,31 @@ const AnimeTrailerScreen = ({data, isLoading}) => {
     <View
       style={{
         backgroundColor: playing ? 'black' : 'transparent',
-        height: dimensionsForScreen.height,
+        height: 250,
         width: dimensionsForScreen.width,
       }}>
-      <Text>{data.data.title}</Text>
       {isLoading ? (
         <Text>Loading...</Text>
       ) : data ? (
-        <View>
+        <View style={styles.centerContent}>
+              <Text>{data.data.title}</Text>
           {data.data.trailer.youtube_id ? (
-            <YoutubeIframe
-              height={250}
-              width={dimensionsForScreen.width}
-              play={playing}
-              videoId={data.data.trailer.youtube_id}
-              onChangeState={onStateChanged}
-            />
+            <>
+              <YoutubeIframe
+                height={250}
+                width={dimensionsForScreen.width}
+                play={playing}
+                videoId={data.data.trailer.youtube_id}
+                onChangeState={onStateChanged}
+              />
+            </>
           ) : (
-            <Text>No Trailer Available</Text>
+            <View >
+              <ImageBackground
+                source={{uri: data.data.images.jpg.image_url}}
+                style={styles.tinyLogo}
+              />
+            </View>
           )}
         </View>
       ) : (
