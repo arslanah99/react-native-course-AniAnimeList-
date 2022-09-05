@@ -8,7 +8,7 @@ import {
   SafeAreaView,
 } from 'react-native';
 import {UseGetSelectedAnimeInfo} from '../../common/hooks/getSelectedAnimeInfoQuery';
-import AnimeRecommendationsScreen from './AnimeRecommendations';
+import AnimeRecommendationScreen from './AnimeRecommendations';
 import AnimeTrailerScreen from './AnimeTrailer';
 
 const dimensionsForScreen = Dimensions.get('screen');
@@ -32,7 +32,7 @@ const SelectedAnimeScreen = ({route}) => {
     <SafeAreaView style={styles.container}>
       <ScrollView>
         <AnimeTrailerScreen data={data} isLoading={isLoading} />
-        <AnimeRecommendationsScreen animeId={selectedanimeData.mal_id} />
+        <AnimeRecommendationScreen animeId={selectedanimeData.mal_id} />
       </ScrollView>
     </SafeAreaView>
   );
