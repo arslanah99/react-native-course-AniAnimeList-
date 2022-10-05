@@ -3,6 +3,7 @@
 #import <React/RCTBridge.h>
 #import <React/RCTBundleURLProvider.h>
 #import <React/RCTRootView.h>
+#import "RNSplashScreen.h" 
 
 #import <React/RCTAppSetupUtils.h>
 
@@ -51,7 +52,7 @@ static NSString *const kRNConcurrentRoot = @"concurrentRoot";
   } else {
     rootView.backgroundColor = [UIColor whiteColor];
   }
-
+    [RNSplashScreen show];
   self.window = [[UIWindow alloc] initWithFrame:[UIScreen mainScreen].bounds];
   UIViewController *rootViewController = [UIViewController new];
   rootViewController.view = rootView;

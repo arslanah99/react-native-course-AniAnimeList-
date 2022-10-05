@@ -7,6 +7,7 @@ import {
   ImageBackground,
   StyleSheet,
 } from 'react-native';
+import FastImage from 'react-native-fast-image';
 import {DataProvider, LayoutProvider, RecyclerListView} from 'recyclerlistview';
 import {UseGetAnimeRecommendationsQuery} from '../../common/hooks/getAnimeRecommendationsQuery';
 
@@ -42,6 +43,7 @@ const styles = StyleSheet.create({
   textStyles: {
     color: 'white',
   },
+
 });
 
 const dimensionsForScreen = Dimensions.get('screen');
@@ -51,14 +53,17 @@ const renderList = (type, animeData, index) => {
   return (
     <View>
       <TouchableOpacity activeOpacity={0.9}>
-        <ImageBackground
-          source={{uri: animeObj.images.jpg.image_url}}
+        <FastImage
+          source={{
+            uri: animeObj.images.jpg.image_url,
+            priority: FastImage.priority.high,
+          }}
           style={styles.tinyLogo}>
           <View style={styles.overlay} />
           <View style={styles.pushTextToBottom}>
             <Text style={styles.textStyles}>{animeObj.title}</Text>
           </View>
-        </ImageBackground>
+        </FastImage>
       </TouchableOpacity>
     </View>
   );

@@ -23,6 +23,7 @@ const styles = StyleSheet.create({
   centerContent: {
     justifyContent: 'center',
     alignItems: 'center',
+
   },
 });
 
@@ -64,7 +65,7 @@ const AnimeTrailerScreen = ({data, isLoading}) => {
               />
             </>
           ) : (
-            <View >
+            <View>
               <ImageBackground
                 source={{uri: data.data.images.jpg.image_url}}
                 style={styles.tinyLogo}

@@ -7,6 +7,7 @@ import {
   StyleSheet,
   TouchableOpacity,
 } from 'react-native';
+import FastImage from 'react-native-fast-image';
 
 const styles = StyleSheet.create({
   container: {
@@ -49,8 +50,11 @@ const AnimeList = ({animeObj}) => {
           selectedAnimeObj: animeObj,
         });
       }}>
-      <ImageBackground
-        source={{uri: animeObj.images.jpg.image_url}}
+      <FastImage
+        source={{
+          uri: animeObj.images.jpg.image_url,
+          priority: FastImage.priority.high,
+        }}
         style={styles.tinyLogo}>
         <View style={styles.overlay} />
         <View style={styles.pushTextToBottom}>
@@ -61,7 +65,7 @@ const AnimeList = ({animeObj}) => {
             {animeObj.title}
           </Text>
         </View>
-      </ImageBackground>
+      </FastImage>
     </TouchableOpacity>
   );
 };
