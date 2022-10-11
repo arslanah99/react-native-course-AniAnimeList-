@@ -1,8 +1,11 @@
 require_relative '../node_modules/react-native/scripts/react_native_pods'
 require_relative '../node_modules/@react-native-community/cli-platform-ios/native_modules'
 
+$RNFirebaseAsStaticFramework = true
+
 platform :ios, '12.4'
 install! 'cocoapods', :deterministic_uuids => false
+use_frameworks!
 
 production = ENV["PRODUCTION"] == "1"
 
@@ -18,7 +21,7 @@ target 'AniAnimeList' do
     :production => production,
     :hermes_enabled => flags[:hermes_enabled],
     :fabric_enabled => flags[:fabric_enabled],
-    :flipper_configuration => FlipperConfiguration.enabled,
+    # :flipper_configuration => FlipperConfiguration.enabled,
     # An absolute path to your application root.
     :app_path => "#{Pod::Config.instance.installation_root}/.."
   )

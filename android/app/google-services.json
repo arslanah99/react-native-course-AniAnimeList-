@@ -1,0 +1,47 @@
+{
+  "project_info": {
+    "project_number": "458270864692",
+    "project_id": "anianimelist",
+    "storage_bucket": "anianimelist.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:458270864692:android:3e37cccbe649394bbaa161",
+        "android_client_info": {
+          "package_name": "com.anianimelist"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "458270864692-052b0gk0gje4uc5iovimn1g3ke70fm77.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.anianimelist",
+            "certificate_hash": "5e8f16062ea3cd2c4a0d547876baa6f38cabf625"
+          }
+        },
+        {
+          "client_id": "458270864692-m4j5koclmtq958kqdotrdmcn38k0qlcu.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBWMeTQk3_9x57QesSgMAyxMjsHaOrrXIs"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "458270864692-m4j5koclmtq958kqdotrdmcn38k0qlcu.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
