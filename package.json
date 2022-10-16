@@ -10,6 +10,7 @@
     "lint": "eslint ."
   },
   "dependencies": {
+    "@gorhom/bottom-sheet": "^4.4.5",
     "@react-native-firebase/analytics": "^15.7.0",
     "@react-native-firebase/app": "^15.7.0",
     "@react-native-firebase/dynamic-links": "^15.7.0",
@@ -20,6 +21,8 @@
     "react": "18.0.0",
     "react-native": "0.69.3",
     "react-native-fast-image": "^8.6.1",
+    "react-native-gesture-handler": "^2.7.1",
+    "react-native-reanimated": "^2.11.0",
     "react-native-safe-area-context": "^4.3.1",
     "react-native-screens": "^3.15.0",
     "react-native-splash-screen": "^3.3.0",
