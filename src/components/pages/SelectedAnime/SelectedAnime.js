@@ -3,6 +3,7 @@ import {StyleSheet, Dimensions, ScrollView, SafeAreaView} from 'react-native';
 import {UseGetSelectedAnimeInfo} from '../../common/hooks/getSelectedAnimeInfoQuery';
 import AnimeRecommendationScreen from './AnimeRecommendations';
 import AnimeTrailerScreen from './AnimeTrailer';
+import SelectedAnimePics from './SelectedAnimePics';
 import SharedAnime from './SharedAnime';
 
 const dimensionsForScreen = Dimensions.get('screen');
@@ -13,7 +14,6 @@ const styles = StyleSheet.create({
     padding: 10,
   },
   container: {
-    flex: 1,
     height: dimensionsForScreen.height,
   },
 });
@@ -34,6 +34,7 @@ const SelectedAnimeScreen = ({route}) => {
         <AnimeTrailerScreen data={data} isLoading={isLoading} />
         <AnimeRecommendationScreen animeId={selectedanimeData.mal_id} />
         {fallbackURL ? <SharedAnime fallbackURL={fallbackURL} /> : null}
+        <SelectedAnimePics animeId={selectedanimeData.mal_id}/>
       </ScrollView>
     </SafeAreaView>
   );
