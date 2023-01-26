@@ -37,7 +37,6 @@ const App = () => {
             },
             headerTitleStyle: {
               fontSize: 50,
-              fontFamily: 'Montserrat-Light',
               color: 'yellow',
             },
             headerLeft: () => (
