@@ -4,16 +4,16 @@ import {
   Dimensions,
   ScrollView,
   SafeAreaView,
+  useWindowDimensions,
   View,
-  Text,
+  Text
 } from 'react-native';
 import {UseGetSelectedAnimeInfo} from '../../common/hooks/getSelectedAnimeInfoQuery';
 import AnimeRecommendationScreen from './AnimeRecommendations';
 import AnimeTrailerScreen from './AnimeTrailer';
 import SelectedAnimePics from './SelectedAnimePics';
 import SharedAnime from './SharedAnime';
-import {TabView, SceneMap} from 'react-native-tab-view';
-import useWindowDimensions from 'react-native/Libraries/Utilities/useWindowDimensions';
+import {TabView} from 'react-native-tab-view';
 
 const dimensionsForScreen = Dimensions.get('screen');
 
@@ -31,14 +31,12 @@ const SelectedAnimeScreen = ({route}) => {
   const [fallbackURL, setFallbackURL] = useState(null);
   const selectedanimeData = route.params.selectedAnimeObj;
   const {data, isLoading} = UseGetSelectedAnimeInfo(selectedanimeData.mal_id);
-
   const layout = useWindowDimensions();
-
-  const [index, setIndex] = React.useState(0);
-  const [routes] = React.useState([
+  const [routes] = useState([
     {key: 'animeInfo', title: 'Anime Info'},
-    {key: 'recommendedAnime', title: 'RecommendedAnime'},
+    {key: 'recommendedAnime', title: 'Recommended Anime'},
   ]);
+  const [index, setIndex] = useState(0);
 
   const AnimeInfo = () => (
     <ScrollView>
@@ -56,7 +54,6 @@ const SelectedAnimeScreen = ({route}) => {
       {fallbackURL ? <SharedAnime fallbackURL={fallbackURL} /> : null}
     </ScrollView>
   );
-
 
   useEffect(() => {
     if (data) {
