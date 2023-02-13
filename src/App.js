@@ -15,10 +15,13 @@ import {
   BackHandler,
   Image,
   View,
+  Alert,
 } from 'react-native';
 import HomeScreen from './components/pages/Home/Home';
 import SelectedAnimeScreen from './components/pages/SelectedAnime/SelectedAnime';
 import SplashScreen from 'react-native-splash-screen';
+import NetInfo from '@react-native-community/netinfo';
+import RNRestart from 'react-native-restart';
 
 const Stack = createNativeStackNavigator();
 
@@ -26,6 +29,23 @@ const App = () => {
   useEffect(() => {
     SplashScreen.hide();
   }, []);
+
+  const unsubscribe = NetInfo.addEventListener(state => {
+    if (state.isConnected === false) {
+      Alert.alert('No Internet!', 'Please reconnect!', [
+        {
+          text: 'Reload App',
+          onPress: () => RNRestart.restart(),
+        },
+      ]);
+    } else if (state.isConnected === true) {
+      console.log('Connected');
+    }
+  });
+
+  useEffect(() => {
+    unsubscribe();
+  });
 
   return (
     <Stack.Navigator initialRouteName="Home">
@@ -48,12 +68,14 @@ const App = () => {
             ),
             headerRight: () => (
               <View style={{height: 50, width: 50}}>
-                <Image 
-                 style={{height: 50, width: 50}}
-                source={{uri: 'https://images.unsplash.com/photo-1641831705160-5d56ac4094cb?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1180&q=80'}}
+                <Image
+                  style={{height: 50, width: 50}}
+                  source={{
+                    uri: 'https://images.unsplash.com/photo-1641831705160-5d56ac4094cb?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1180&q=80',
+                  }}
                 />
               </View>
-            )
+            ),
           };
         }}
         name="Home"
